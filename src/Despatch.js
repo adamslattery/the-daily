@@ -1,5 +1,5 @@
-const Despatch = ({ url, method, data }) => {
-
+const Despatch = ( url, method, data ) => {
+  
     const requestOptions = {
         method: method,
         headers: { 'Content-Type': 'application/json' },
@@ -17,7 +17,7 @@ const Despatch = ({ url, method, data }) => {
             console.log('response:');
             console.log(data);
 
-         /* setData(data);
+        /* setData(data);
           setIsLoading(false);
           setError(null);*/
         })
@@ -26,13 +26,14 @@ const Despatch = ({ url, method, data }) => {
           {
             console.log('fetch aborted');
           } else {
-           /* setError(err.message);
+          /* setError(err.message);s
             setIsLoading(false);*/
           }
         });
     return ( 
         data
     );
+
 }
  
 export default Despatch;

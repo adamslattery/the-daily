@@ -1,14 +1,6 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "Ricky"
-    },
-    {
-      "id": 2,
-      "name": "Brayden"
-    },
-    {
       "id": 3,
       "name": "Simon"
     },
@@ -17,45 +9,23 @@
       "name": "Logan"
     },
     {
-      "id": 5,
-      "name": "Adam"
+      "name": "Adam",
+      "id": 5
     }
   ],
-"items": [
-    {
-      "id": 1,
-      "text": "this is great",
-      "isDone": false,
-      "isPri": true,
-      "userId": 1
-    },
-    {
-      "id": 2,
-      "text": "new Item here",
-      "isDone": false,
-      "isPri": false,
-      "userId": 2
-    },
-    {
-      "id": 3,
-      "text": "This is a good test",
-      "isDone": false,
-      "isPri": false,
-      "userId": 2
-
-    },
+  "items": [
     {
       "id": 4,
       "text": "new",
-      "isDone": false,
-      "isPri": false,
+      "isDone": true,
+      "isPri": true,
       "userId": 3
     },
     {
       "id": 5,
       "text": "this is great",
       "isDone": false,
-      "isPri": false,
+      "isPri": true,
       "userId": 3
     },
     {
@@ -73,11 +43,18 @@
       "userId": 4
     },
     {
-      "id": 8,
-      "text": "this is good",
+      "text": "This is a good test",
       "isDone": false,
       "isPri": false,
-      "userId": 5
+      "userId": 5,
+      "id": 8
+    },
+    {
+      "text": "This is a good test",
+      "isDone": false,
+      "isPri": false,
+      "userId": 3,
+      "id": 9
     }
   ]
 }

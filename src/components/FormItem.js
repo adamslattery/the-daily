@@ -1,57 +1,33 @@
 import { useState} from "react";
 import { Button, Form, InputGroup } from 'react-bootstrap';
-import Despatch from "../Despatch";
 
-function FormItem({ title, lists }) {
+function FormItem({ title, lists, updateList}) {
     const [value, setValue] = useState("");
     const [sourceList, setSource] = useState("");
-
-    let url =  'http://localhost:9000/priorities';
-    let method = '';
-    let data = '';
+    const [sourceId, setSourceId] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         if (!sourceList) return;
         if (!value) return;
-        
-        if(sourceList === "Add New List"){
-            method = 'post';
-            data = [{
-                source: value,
-                items: []
-            }];
-            document.getElementById('sourceSelect').value = 0;
-            console.log('put');
-            console.log(url);
-            console.log(method);
-            console.log(data);
-        } else {
-            url += '?source='+sourceList;
-            method = 'patch';
-            data = {
-                source: sourceList,
-                items: [{ text: value, isDone: false, isPri: false }]
-            };
-            console.log('patch');
-            console.log(url);
-            console.log(method);
-            console.log(data);
-        }
+
+        console.log(sourceList);
+        console.log(sourceId);
+        updateList(sourceId, sourceList, value);
         setValue('');
-        const {outdata} = Despatch({ url, method, data });
     };
   
     return (
       <Form onSubmit={handleSubmit}> 
       <Form.Group>
         <InputGroup className="mb-3">
-          <Form.Select className="" id="sourceSelect" onChange={e => setSource(e.target.value)}>
+          <Form.Select className="" id="sourceSelect" onChange={e => {setSource(e.target.value); setSourceId(e.target[e.target.selectedIndex].dataset.userid)}}>
             <option>Choose List</option>
             <option>Add New List</option>
             {lists.map((list, index) => (
-              <option className="list" key={index}>{list.source}</option>
+              /*<option className="list" id={list.id} key={index}>{list.name}</option>*/
+              <option className="list" data-userid={list.id} key={index}>{list.name}</option>
             ))}
           </Form.Select>
           <Form.Control name="item" type="text" className="w-75" value={value} onChange={e => setValue(e.target.value)} placeholder="Enter a new item" />

@@ -1,6 +1,6 @@
 import { Button, Card } from 'react-bootstrap';
 
-const Item = ({ item, listId, updateItem }) => {
+const Item = ({ item, listId, updateItem}) => {
     return (
       <div className="item">
   
@@ -9,17 +9,17 @@ const Item = ({ item, listId, updateItem }) => {
             <Button variant="outline-success" onClick={() => updateItem(listId, item.id, 'complete')}>✓</Button>{' '}
             <Button variant="outline-danger" onClick={() => updateItem(listId, item.id, 'delete')}>✕</Button>
           </div>
-          <span style={{ textDecoration: item.isDone ? "line-through" : "", fontWeight: item.isPri ? "bold" : "normal" }}>{item.text}</span>
+          <span style={{ textDecoration: item.isDone ? "line-through" : "", color: item.isDone ? "Grey" : "inherit", fontWeight: item.isPri ? "bold" : "normal" }}>{!item ? 'No items yet' : item.text}</span>
   
       </div>
     );
   };
 
-const ItemList = ({ lists, updateItem }) => {
+const ItemList = ({ lists, updateItem, updateList }) => {
     return (
     <div className="lists">
     {lists.map((list, index) => (
-      <div className="list" key={index}>
+      <div className="list" key={index} onDoubleClick={(e) => {if(e.ctrlKey) updateList(list.id, list.name, 'delete' );}}>
         <h2>{list.name}</h2>
         {list.items.map((item, index) => (
           <Card key={index}>
