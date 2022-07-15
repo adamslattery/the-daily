@@ -41,6 +41,8 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 ## JSON Server to host for dev
 
+npm install -g json-server
+
 npx json-server --watch lists.json --port 9000
 
 ## Learn More
