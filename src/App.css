@@ -8,6 +8,19 @@
   display: flex;
 }
 
+.single-list{
+  padding-bottom: 20px;;
+}
+
+.single-list>.heading {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  margin: 0 auto;
+  padding: 3px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .item {
   align-items: center;
   /*display: flex;*/
@@ -25,24 +38,22 @@ h2 {
 }
 
 .list {
-  float: left;
   width: 20%;
-  padding: 3px 3px ;
-
-  position: relative;
+  margin: 2px;
+  padding: 3px;
   display: flex;
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid rgba(0,0,0,.125);
+  border: 1px solid rgba(0, 0, 0, .125);
   border-radius: 0.25rem;
 }
 
 .control-buttons button.btn {
   font-size: .5rem;
- padding: 0.5em 0.5rem;
+  padding: 0.5em 0.5rem;
 }
 
 .control-buttons {
@@ -56,4 +67,42 @@ h2 {
   content: "";
   clear: both;
   display: table;
+}
+
+
+/* Main structure */
+.main {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  margin: 0 auto;
+}
+
+.main>div {
+  background: #fefefe;
+  padding: 5px;
+  border: 1px solid;
+}
+.main>div:nth-child(2) {
+
+}
+
+.stats {}
+
+.alerts {}
+
+.notifications {}
+
+/* Stats structure */
+
+.week1 {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  margin: 0 auto;
+}
+
+.week1>div {
+  background: #fefefe;
+  padding: 2px;
+  border: 1px solid;
 }

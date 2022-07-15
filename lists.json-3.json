@@ -79,5 +79,115 @@
       "isPri": false,
       "userId": 5
     }
-  ]
+  ],
+  "weeks":[
+    {
+      "id": 1,
+      "week": 1,
+      "in": "Y",
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "week": 1,
+      "in": "Y",
+      "userId": 1
+    },
+    {
+      "id": 3,
+      "week": 1,
+      "in": "Y",
+      "userId": 1
+    },
+    {
+      "id": 4,
+      "week": 1,
+      "in": "Y",
+      "userId": 1
+    },
+    {
+      "id": 5,
+      "week": 1,
+      "in": "Y",
+      "userId": 1
+    },
+    {
+      "id": 6,
+      "week": 1,
+      "in": "Y",
+      "userId": 2
+    },
+    {
+      "id": 7,
+      "week": 1,
+      "in": "Y",
+      "userId": 2
+    },
+    {
+      "id": 8,
+      "week": 1,
+      "in": "Y",
+      "userId": 2
+    },
+    {
+      "id": 9,
+      "week": 1,
+      "in": "Y",
+      "userId": 2
+    },
+    {
+      "id": 10,
+      "week": 1,
+      "in": "Y",
+      "userId": 2
+    }
+  ],
+  "alerts": [
+    {
+      "id": 8,
+      "text": "this is good",
+      "isDone": false,
+      "isPri": false,
+      "userId": 5
+    }
+  ],
+  "instructions": [
+      {
+        "id": 8,
+        "text": "this is good",
+        "isDone": false,
+        "isPri": false,
+        "userId": 5
+      }
+  ],
+  "changes": [
+    {
+      "id": 8,
+      "text": "this is good",
+      "isDone": false,
+      "isPri": false,
+      "userId": 5
+    }
+  ],
+  "overall-stats": {
+      "id": 8,
+      "text": "this is good",
+      "isDone": false,
+      "isPri": false,
+      "userId": 5
+    },
+  "mobile": {
+      "id": 8,
+      "text": "this is good",
+      "isDone": false,
+      "isPri": false,
+      "userId": 5
+    },
+  "daily-stats": {
+      "id": 8,
+      "open": "89",
+      "isDone": false,
+      "isPri": false,
+      "userId": 5
+    }
 }

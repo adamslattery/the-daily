@@ -1,86 +1,60 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect, useRef } from "react";
 import './App.css';
 import { Tabs, Tab } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Route, Switch }  from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavBar from "./components/NavBar";
 import FormItem from "./components/FormItem";
 import ItemList from "./components/ItemList";
 import Despatch from "./Despatch";
+import Editable from "./components/Editable";
+import WeekTable from "./components/WeekTable";
+import IntructionsList from "./components/InstructionList";
+import IntructionList from "./components/InstructionList";
+import NotificationsList from "./components/NotificationsList";
+import ApiFetch from "./ApiFetch";
+import SingleList from "./components/SingleList";
 
 
 function App() {
-
- // const { data: lists, isLoading, error } = useFetch('http://localhost:9000/users/?_embed=items');
-  const [key, setKey] = useState('priorities');
-  const [lists, setData] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+  const [key, setKey] = useState('main');
+  const [lists, setData] = useState(null);
+  const [alerts, setAlerts] = useState(null);
   const [error, setError] = useState(null);
-  const [url, setUrl] = useState(null);
-  
-  
-  useEffect(() => {   
-      if(!url){
-        setUrl('http://localhost:9000/users/?_embed=items');
-      }
+  const [isLoading, setIsLoading] = useState(true);
+  const [url, setUrl] = useState('http://localhost:9000/users/?_embed=items');
 
-      const abortCont = new AbortController();
-      console.log(url);
-      
-      var requestOptions = {
-        signal: abortCont.signal
-      }
-/*
-      if(method==='post') {
-        requestOptions.push({method: method})
-        requestOptions.push({headers: { 'Content-Type': 'application/json' }})
-        requestOptions.push({body: JSON.stringify(data)})
-      }
-*/
-      fetch(url, requestOptions)
-        .then(res => {
-          if(!res.ok) {
-            throw Error('Could not fetch from '+url)
-          }
-          return res.json();        
-        })
-        .then(data => {
-          setData(data);
-          setIsLoading(false);
-          setError(null);
-        })
-        .catch(err => {
-          if(err.name === 'AbortError')
-          {
-            console.log('fetch aborted');
-          } else {
-            setError(err.message);
-            setIsLoading(false);
-          }
-        });
-      return () => abortCont.abort();
-    }, [url]);
+  const GetApiData = async () => {
+    const { data, isLoading, error } = await ApiFetch(url)
+    setData(data);
+    
+    const alerts = await ApiFetch(`http://localhost:9000/alerts`)
+    setAlerts(alerts);
+
+    setIsLoading(isLoading);
+    setError(error);
+  };
+
+  useEffect(() => {
+    GetApiData();
+  }, [url]);
 
 
   const updateItem = (listId, itemId, action) => {
     const newlists = [...lists];
-    //console.log(lists);
-    //console.log(listId);
-    //console.log(itemId);
-    //console.log(action);
     var urlTail = '';
     var data = '';
     var method = 'put';
     newlists.forEach((list) => {
-      
+
       if (list.id === listId) {
-        console.log(list.name);
+        //console.log(list.name);
         list.items.forEach((item, index) => {
           if (item.id === itemId) {
-            console.log(item);
-            console.log(item.isPri);
-            console.log(action);
-            switch(action) {
+            //console.log(item);
+            //console.log(item.isPri);
+            //console.log(action);
+            switch (action) {
               case 'pri':
                 item.isPri = (item.isPri % 2) === 0;
                 break;
@@ -89,39 +63,39 @@ function App() {
                 break;
               case 'delete':
                 list.items.splice(index, 1);
-                method='delete';
+                method = 'delete';
                 break;
               default:
                 break;
             }
             urlTail = 'items/' + item.id
-            data=item;
+            data = item;
           }
         })
-        console.log(urlTail);
-        console.log(data);
+        //console.log(urlTail);
+        //console.log(data);
       }
-      
+
     });
     Despatch('http://localhost:9000/' + urlTail, method, data)
-    console.log(newlists);
+    //console.log(newlists);
     setData(newlists);
   };
 
   const updateList = (sourceId, sourceList, value) => {
     setUrl('');
-    let url =  'http://localhost:9000/';
+    let url = 'http://localhost:9000/';
     let urlTail = '';
     let method = 'post';
     let data = '';
 
-    if(sourceList === "Add New List"){
+    if (sourceList === "Add New List") {
       console.log('Add list');
-        urlTail = 'users'
-        data = { name: value };
-        document.getElementById('sourceSelect').value = 0;
+      urlTail = 'users'
+      data = { name: value };
+      document.getElementById('sourceSelect').value = 0;
     } else {
-      if(value ==='delete') {
+      if (value === 'delete') {
         console.log('Remove list');
         urlTail = 'users/' + sourceId;
         method = 'delete';
@@ -137,24 +111,35 @@ function App() {
     console.log(data);
 
     Despatch(url + urlTail, method, data);
-    setUrl(null);
+    setUrl("");
   };
 
   return (
     <Router>
       <div className="app">
         <div className="container-fluid">
-          <NavBar />
           <Switch>
             <Route exact path="/">
               <h1 className="text-center mb-4">ICT DOS</h1>
-              <Tabs id="-tab-example" activeKey={key} onSelect={(k) => setKey(k)} className="mb-3">
+              <Tabs id="" activeKey={key} onSelect={(k) => setKey(k)} className="mb-3">
                 <Tab eventKey="main" title="Main">
+                  <div className="main">
+                    <div className="stats">
+                      <WeekTable />
+                      <WeekTable />
+                    </div>
+                    <div className="alerts">
+                      {<SingleList title="Alerts" tail="alerts" />}
+                      {<SingleList title="Instructions" tail="instructions" />}
+                    </div>
+                    <div className="notifications">
+                    {<SingleList title="Changes & Notifications" tail="changes" />}
+                    </div>
+                  </div>
                 </Tab>
                 <Tab eventKey="priorities" title="Priorities">
-                  {error && <div>{ error }</div>}
+                  {error && <div>{error}</div>}
                   {isLoading && <div className="test"> Loading...</div>}
-                  {lists && <FormItem title="title" lists={lists} updateList={updateList} />}
                   {lists && <ItemList lists={lists} updateItem={updateItem} updateList={updateList} />}
                 </Tab>
                 <Tab eventKey="config" title="Config" disabled>
@@ -164,7 +149,7 @@ function App() {
           </Switch>
         </div>
       </div>
-    </Router>
+    </Router >
   );
 
 }
