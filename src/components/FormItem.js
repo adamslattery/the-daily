@@ -26,7 +26,6 @@ function FormItem({ title, lists, updateList}) {
             <option>Choose List</option>
             <option>Add New List</option>
             {lists.map((list, index) => (
-              /*<option className="list" id={list.id} key={index}>{list.name}</option>*/
               <option className="list" data-userid={list.id} key={index}>{list.name}</option>
             ))}
           </Form.Select>

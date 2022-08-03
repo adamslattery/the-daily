@@ -5,10 +5,6 @@
       "name": "Ricky"
     },
     {
-      "id": 2,
-      "name": "Brayden"
-    },
-    {
       "id": 3,
       "name": "Simon"
     },
@@ -23,132 +19,216 @@
   ],
   "items": [
     {
+      "id": 1,
+      "text": "This is a test",
+      "isDone": false,
+      "isPri": false,
+      "userId": 1
+    },
+    {
       "id": 2,
-      "text": "new Item here",
-      "isDone": true,
-      "isPri": true,
-      "userId": 2
+      "text": "Get something done",
+      "isDone": false,
+      "isPri": false,
+      "userId": 3
     },
     {
       "id": 3,
-      "text": "This is a good test",
+      "text": "Do something else",
       "isDone": false,
-      "isPri": true,
-      "userId": 2
+      "isPri": false,
+      "userId": 4
     },
     {
       "id": 4,
-      "text": "new",
-      "isDone": false,
-      "isPri": true,
-      "userId": 3
-    },
-    {
-      "id": 5,
-      "text": "this is great",
-      "isDone": false,
-      "isPri": true,
-      "userId": 3
-    },
-    {
-      "id": 6,
-      "text": "Another item",
+      "text": "Do this and that",
       "isDone": false,
       "isPri": false,
-      "userId": 4
-    },
-    {
-      "id": 7,
-      "text": "test",
-      "isDone": false,
-      "isPri": false,
-      "userId": 4
+      "userId": 5
     }
   ],
   "weeks": [
     {
       "id": 1,
       "week": 1,
-      "in": "Y",
+      "monday": "Y",
+      "tuesday": "Y",
+      "wednesday": "Y",
+      "thursday": "Y",
+      "friday": "Y",
       "userId": 1
     },
     {
       "id": 2,
       "week": 1,
-      "in": "Y",
-      "userId": 1
+      "monday": "",
+      "tuesday": "",
+      "wednesday": "",
+      "thursday": "",
+      "friday": "",
+      "userId": 2
     },
     {
       "id": 3,
       "week": 1,
-      "in": "Y",
-      "userId": 1
+      "monday": "",
+      "tuesday": "",
+      "wednesday": "",
+      "thursday": "",
+      "friday": "",
+      "userId": 3
     },
     {
       "id": 4,
       "week": 1,
-      "in": "Y",
-      "userId": 1
+      "monday": "",
+      "tuesday": "",
+      "wednesday": "",
+      "thursday": "",
+      "friday": "",
+      "userId": 4
     },
     {
       "id": 5,
-      "week": 1,
-      "in": "Y",
+      "week": 2,
+      "monday": "N",
+      "tuesday": "N",
+      "wednesday": "N",
+      "thursday": "N",
+      "friday": "N",
       "userId": 1
     },
     {
       "id": 6,
-      "week": 1,
-      "in": "Y",
+      "week": 2,
+      "monday": "",
+      "tuesday": "",
+      "wednesday": "",
+      "thursday": "",
+      "friday": "",
       "userId": 2
     },
     {
       "id": 7,
-      "week": 1,
-      "in": "Y",
-      "userId": 2
+      "week": 2,
+      "monday": "",
+      "tuesday": "",
+      "wednesday": "",
+      "thursday": "",
+      "friday": "",
+      "userId": 3
     },
     {
       "id": 8,
-      "week": 1,
-      "in": "Y",
-      "userId": 2
-    },
-    {
-      "id": 9,
-      "week": 1,
-      "in": "Y",
-      "userId": 2
-    },
-    {
-      "id": 10,
-      "week": 1,
-      "in": "Y",
-      "userId": 2
+      "week": 2,
+      "monday": "",
+      "tuesday": "",
+      "wednesday": "",
+      "thursday": "",
+      "friday": "",
+      "userId": 4
     }
   ],
   "alerts": [
     {
-      "text": "123",
+      "text": "Alert 1",
       "isDone": false,
       "isPri": false,
       "id": 1
+    },
+    {
+      "text": "Alert 3",
+      "isDone": false,
+      "isPri": true,
+      "id": 3
+    },
+    {
+      "text": "Alert 4",
+      "isDone": false,
+      "isPri": true,
+      "id": 4
     }
   ],
   "instructions": [
     {
-      "text": "test88",
-      "isDone": false,
+      "text": "test",
+      "isDone": true,
       "isPri": false,
       "id": 1
+    },
+    {
+      "text": "",
+      "isDone": false,
+      "isPri": false,
+      "id": 6
+    },
+    {
+      "id": 7,
+      "text": "123",
+      "isDone": false,
+      "isPri": false
+    },
+    {
+      "id": 8,
+      "text": "re",
+      "isDone": false,
+      "isPri": false
+    },
+    {
+      "id": 9,
+      "text": "114477",
+      "isDone": false,
+      "isPri": false
     }
   ],
   "changes": [
     {
-      "text": "1",
+      "text": "Change 1",
       "isDone": false,
-      "isPri": false,
+      "isPri": true,
       "id": 1
+    },
+    {
+      "text": "Change 2",
+      "isDone": true,
+      "isPri": true,
+      "id": 2
+    },
+    {
+      "text": "Change 3",
+      "isDone": true,
+      "isPri": false,
+      "id": 3
+    },
+    {
+      "text": "Change 4",
+      "isDone": true,
+      "isPri": true,
+      "id": 4
+    },
+    {
+      "text": "Change 5",
+      "isDone": true,
+      "isPri": true,
+      "id": 5
+    },
+    {
+      "text": "Change 6",
+      "isDone": true,
+      "isPri": true,
+      "id": 6
+    },
+    {
+      "text": "Change 7",
+      "isDone": false,
+      "isPri": true,
+      "id": 7
+    },
+    {
+      "text": "Change 8",
+      "isDone": false,
+      "isPri": true,
+      "id": 8
     }
   ],
   "overall-stats": {

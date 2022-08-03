@@ -10,12 +10,7 @@ const ItemList = ({ lists, updateItem, updateList }) => {
         {list.items.map((item, index) => (
           <Card key={index}>
             <Card.Body>
-              <Item
-              key={index}
-              item={item}
-              listId={list.id}
-              updateItem={updateItem}
-              />
+              
             </Card.Body>
           </Card>
         ))}

@@ -1,10 +1,22 @@
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
+import ApiFetch from "../ApiFetch";
+import Despatch from "../Despatch";
 import Editable from "./Editable";
 
 const WeekTable = ({ item, listId, updateItem }) => {
-    const [task, setTask] = useState("");
+    const [data, setData] = useState("");
     const inputRef = useRef();
 
+
+    const GetApiData = async () => {
+        const { data, isLoading, error } = await ApiFetch(`http://localhost:9000/weeks`)
+        setData(data);
+        console.log(data);
+    };
+
+    useEffect(() => {
+        GetApiData();
+    }, []);
 
     return (
         <div className="week">
@@ -16,119 +28,30 @@ const WeekTable = ({ item, listId, updateItem }) => {
                 <div>Wednesday</div>
                 <div>Thursday</div>
                 <div>Friday</div>
-                <div>Ricky</div>
-                <div>
-                    <Editable
-                        text={task}
-                        placeholder=""
-                        childRef={inputRef}
-                        type="input">
-                        <input
-                            ref={inputRef}
-                            type="text"
-                            name="task"
-                            placeholder=""
-                            value={task}
-                            onChange={e => setTask(e.target.value)}
-                        />
-                    </Editable>
-                </div>
-                <div>
-                    <Editable
-                        text={task}
-                        placeholder=""
-                        childRef={inputRef}
-                        type="input">
-                        <input
-                            ref={inputRef}
-                            type="text"
-                            name="task"
-                            placeholder=""
-                            value={task}
-                            onChange={e => setTask(e.target.value)}
-                        />
-                    </Editable>
-                </div>
-                <div>
-                    <Editable
-                        text={task}
-                        placeholder=""
-                        childRef={inputRef}
-                        type="input">
-                        <input
-                            ref={inputRef}
-                            type="text"
-                            name="task"
-                            placeholder=""
-                            value={task}
-                            onChange={e => setTask(e.target.value)}
-                        />
-                    </Editable>
-                </div>
-                <div>
-                    <Editable
-                        text={task}
-                        placeholder=""
-                        childRef={inputRef}
-                        type="input">
-                        <input
-                            ref={inputRef}
-                            type="text"
-                            name="task"
-                            placeholder=""
-                            value={task}
-                            onChange={e => setTask(e.target.value)}
-                        />
-                    </Editable>
-                </div>
-                <div>
-                    <Editable
-                        text={task}
-                        placeholder=""
-                        childRef={inputRef}
-                        type="input">
-                        <input
-                            ref={inputRef}
-                            type="text"
-                            name="task"
-                            placeholder=""
-                            value={task}
-                            onChange={e => setTask(e.target.value)}
-                        />
-                    </Editable>
-                </div>
-                <div>Simon</div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div>Simon</div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div>Logan</div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div>Adam</div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div>Queue</div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+                {data && data.map((user, index) => {
+                    <>
+                        <div>Ricky</div>
+                        <div>
+                            <Editable
+                                text={user.monday}
+                                placeholder=""
+                                childRef={inputRef}
+                                type="input">
+                                <input
+                                    ref={inputRef}
+                                    type="text"
+                                    name={user.id}
+                                    placeholder=""
+                                    value={user.monday}
+                                    onChange={e => setData(e.target.value)}
+                                />
+                            </Editable>
+                        </div>
+                    </>
+                })}
+
             </div>
-        </div>
+        </div >
     );
 }
 

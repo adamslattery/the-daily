@@ -6,8 +6,6 @@ import Editable from './Editable';
 
 const SingleList = ({ title, tail }) => {
   const [data, setData] = useState(null);
-  const [url, setUrl] = useState(null);
-  const [task, setTask] = useState("");
   const inputRef = useRef();
 
   const GetApiData = async () => {
@@ -18,22 +16,24 @@ const SingleList = ({ title, tail }) => {
 
   useEffect(() => {
     GetApiData();
-  }, [url]);
+  }, []);
 
-  const actionItem = (itemId, action) => {
+  const actionItem = async (itemId, action) => {
     const newData = [...data];
     var urlTail = '';
     var postData = '';
     var method = 'put';
 
+    if (action === 'delete') {
+      if (!window.confirm("Continue deleting this item?")) {
+        return;
+      }
+    }
+
     if (action === 'new') {
-      postData = { text: '', isDone: false, isPri: false };
-      newData.push(postData);
-      console.log(postData)
-      console.log(newData);
+      postData = { id: 0, text: '', isDone: false, isPri: false };
       urlTail = `${tail}/`;
       method = 'post';
-      setData(newData);
     } else {
       newData.forEach((item, index) => {
         if (item.id === itemId) {
@@ -45,11 +45,7 @@ const SingleList = ({ title, tail }) => {
               item.isDone = (item.isDone % 2) === 0;
               break;
             case 'delete':
-              console.log(newData);
-              console.log('this is index ' + index)
               newData.splice(index, 1);
-              console.log(newData);
-
               method = 'delete';
               break;
             default:
@@ -57,22 +53,18 @@ const SingleList = ({ title, tail }) => {
               break;
           }
           postData = item;
-          console.log('acion '+action);
-          console.log('item id '+item.id);
+          console.log('acion ' + action);
+          console.log('item id ' + item.id);
           urlTail = `${tail}/${item.id}`;
         }
       });
     }
 
-
-    //console.log(urlTail);
-    //console.log(data);
-
-    Despatch('http://localhost:9000/' + urlTail, method, postData)
+    const resp = await Despatch('http://localhost:9000/' + urlTail, method, postData)
+    if (action === 'new') {
+      newData.push(resp)
+    }
     setData(newData);
-    GetApiData();
-    //console.log(newlists);
-    
   };
 
   const editText = (itemId, e) => {
@@ -90,18 +82,13 @@ const SingleList = ({ title, tail }) => {
         <Button variant="outline-success" onClick={() => actionItem(0, 'new')}>+</Button>
       </div>
       {data && data.map((item, index) => (
-        <div className="item" key={index} onDoubleClick={(e) => { if (e.ctrlKey) actionItem(item.id, 'delete'); }}>
+        <div className="item" key={index}>
           <Card key={index}>
             <Card.Body>
               <div className="item">
-                <div className="control-buttons">
-                  <Button variant="outline-success" active={item.isPri ? "true" : ""} onClick={() => actionItem(item.id, 'pri')}>Pri</Button>
-                  <Button variant="outline-success" onClick={() => actionItem(item.id, 'complete')}>✓</Button>
-                  <Button variant="outline-danger" onClick={() => actionItem(item.id, 'delete')}>✕</Button>
-                </div>
                 <span style={{
                   textDecoration: item.isDone ? "line-through" : "",
-                  color: item.isDone ? "Grey" : "inherit",
+                  color: item.isDone ? "lightgrey" : "inherit",
                   fontWeight: item.isPri ? "bold" : "normal"
                 }}>
                   {!item ? 'No entries yet' :
@@ -123,12 +110,13 @@ const SingleList = ({ title, tail }) => {
                           setData(newdata);
                         }}
                         onBlur={e => editText(item.id, e)}
-                        onKeyDown={e => {
-                          if (e.key === 'Enter') { 
-                            e.key = 'tab'; editText(item.id, e);
-                          }}}
                       />
                     </Editable>}</span>
+                <div className="control-buttons">
+                  <Button variant="outline-success" active={item.isPri ? "true" : ""} onClick={() => actionItem(item.id, 'pri')}>Pri</Button>
+                  <Button variant="outline-success" onClick={() => actionItem(item.id, 'complete')}>✓</Button>
+                  <Button variant="outline-danger" onClick={() => actionItem(item.id, 'delete')}>✕</Button>
+                </div>
               </div>
             </Card.Body>
           </Card>

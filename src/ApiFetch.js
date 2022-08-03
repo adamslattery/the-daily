@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 const ApiFetch = async (url) => {
   //const [data, setData] = useState();
   //const [isLoading, setIsLoading] = useState(true);
@@ -9,8 +7,7 @@ const ApiFetch = async (url) => {
   let isLoading = true;
   let error = null;
 
-  const abortCont = new AbortController();
-
+  const abortCont = new AbortController()
 
   await fetch(url, { signal: abortCont.signal })
     .then(res => {
@@ -27,7 +24,7 @@ const ApiFetch = async (url) => {
     })
     .catch(err => {
       if (err.name === 'AbortError') {
-        console.log('fetch aborted');
+        console.log('fetch aborted')
       } else {
         error = err.message;
         isLoading = false;

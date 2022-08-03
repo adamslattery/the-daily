@@ -6,24 +6,36 @@
 
 .lists {
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+
+}
+.list {
+  background-color: #fff;
+  padding: 3px;
+  margin: 2px;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, .125);
+  border-radius: 0.25rem;
 }
 
 .single-list{
-  padding-bottom: 20px;;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 20;
+  padding-bottom: 20px;
+  margin: 3px;
 }
 
 .single-list>.heading {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  margin: 0 auto;
-  padding: 3px;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
 }
 
 .item {
   align-items: center;
-  /*display: flex;*/
   font-size: 18px;
   justify-content: space-between;
 }
@@ -37,7 +49,7 @@ h2 {
   padding: 0 5px;
 }
 
-.list {
+/*.list {
   width: 20%;
   margin: 2px;
   padding: 3px;
@@ -49,7 +61,7 @@ h2 {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, .125);
   border-radius: 0.25rem;
-}
+}*/
 
 .control-buttons button.btn {
   font-size: .5rem;
@@ -105,4 +117,8 @@ h2 {
   background: #fefefe;
   padding: 2px;
   border: 1px solid;
+}
+
+input:hover {
+  cursor: pointer;
 }
